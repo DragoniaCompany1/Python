@@ -1,1228 +1,1815 @@
 <html class="scroll-smooth" lang="id">
  <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>🐍 E-Book Python untuk Pemula - Bab 2: Variabel & Tipe Data</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   E-Book Python untuk Pemula - Bab 1
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
-   @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
-
    body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #e0e7ff;
-    perspective: 1200px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-   }
-   /* Scrollbar styling */
-   ::-webkit-scrollbar {
-    width: 10px;
-   }
-   ::-webkit-scrollbar-track {
-    background: #1e293b;
-   }
-   ::-webkit-scrollbar-thumb {
-    background-color: #6366f1;
-    border-radius: 10px;
-    border: 3px solid #1e293b;
-   }
-   /* Code block styling */
-   pre {
-    background: #1e293b;
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
-    overflow-x: auto;
-    font-family: 'Fira Code', monospace, monospace;
-    font-size: 1rem;
-    color: #a5b4fc;
-    box-shadow: 0 0 12px #6366f1cc, inset 0 0 10px #6366f1dd;
-    transform-style: preserve-3d;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
-    position: relative;
-   }
-   pre::before {
-    content: '';
-    position: absolute;
-    top: 0.5rem;
-    left: 1rem;
-    width: 12px;
-    height: 12px;
-    background: #6366f1;
-    border-radius: 50%;
-    box-shadow:
-      20px 0 0 #ef4444,
-      40px 0 0 #fbbf24;
-    animation: pulseDots 2.5s infinite ease-in-out;
-   }
-   @keyframes pulseDots {
-    0%, 100% {
-      opacity: 0.3;
-      transform: scale(1);
+      font-family: "Poppins", sans-serif;
+      background: #0f172a;
+      color: #e0e7ff;
+      perspective: 1200px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    50% {
-      opacity: 1;
-      transform: scale(1.3);
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
-   }
-   pre:hover {
-    transform: rotateX(8deg) rotateY(8deg) translateZ(15px);
-    box-shadow: 0 0 30px #818cf8, inset 0 0 18px #818cf8dd;
-   }
-   code {
-    font-family: 'Fira Code', monospace, monospace;
-    white-space: pre-wrap;
-    word-break: break-word;
-   }
-   /* Link styling */
-   a {
-    color: #818cf8;
-    text-decoration: underline;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    position: relative;
-    z-index: 0;
-   }
-   a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background: #818cf8;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease;
-    z-index: -1;
-   }
-   a:hover {
-    color: #a5b4fc;
-    text-shadow: 0 0 8px #a5b4fc;
-   }
-   a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-   }
-   /* Heading 3D effect */
-   h1,
-   h2,
-   h3,
-   h4 {
-    text-shadow:
-      1px 1px 2px #312e81,
-      2px 2px 6px #4338ca,
-      0 0 10px #6366f1;
-    transition: text-shadow 0.3s ease;
-   }
-   h1:hover,
-   h2:hover,
-   h3:hover,
-   h4:hover {
-    text-shadow:
-      2px 2px 4px #4338ca,
-      4px 4px 12px #818cf8,
-      0 0 20px #a5b4fc;
-   }
-   /* Blockquote styling */
-   blockquote {
-    border-left: 5px solid #6366f1;
-    padding-left: 1.25rem;
-    font-style: italic;
-    color: #c7d2fe;
-    background: #1e293b;
-    border-radius: 0.75rem;
-    box-shadow: inset 0 0 10px #6366f1cc;
-    margin: 1.75rem 0;
-    transform-style: preserve-3d;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    position: relative;
-   }
-   blockquote::before {
-    content: "“";
-    font-size: 4rem;
-    color: #818cf8;
-    position: absolute;
-    top: -1.5rem;
-    left: 1rem;
-    opacity: 0.15;
-    font-weight: 900;
-    font-family: serif;
-    user-select: none;
-   }
-   blockquote:hover {
-    transform: translateZ(15px);
-    box-shadow: inset 0 0 20px #818cf8cc;
-   }
-   /* Table styling */
-   table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: 100%;
-    margin: 1.75rem 0;
-    box-shadow: 0 0 15px #4338caaa;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    transform-style: preserve-3d;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-   }
-   table:hover {
-    transform: translateZ(15px);
-    box-shadow: 0 0 30px #818cf8cc;
-   }
-   th,
-   td {
-    padding: 0.85rem 1.25rem;
-    border-bottom: 1px solid #312e81;
-    text-align: left;
-    transition: background-color 0.3s ease;
-   }
-   th {
-    background: linear-gradient(90deg, #4338ca, #6366f1);
-    color: #e0e7ff;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-   }
-   td {
-    background: #1e293b;
-    color: #c7d2fe;
-   }
-   tr:nth-child(odd) td {
-    background: #1c264f;
-   }
-   tr:hover td {
-    background-color: #4f46e5;
-    color: #e0e7ff;
-   }
-   /* List styling */
-   ol li,
-   ul li {
-    margin-bottom: 0.6rem;
-    line-height: 1.6;
-   }
-   /* Section spacing */
-   section {
-    margin-bottom: 3.5rem;
-    transform-style: preserve-3d;
-    transition: transform 0.4s ease;
-    position: relative;
-    padding: 1rem 1.25rem;
-    border-radius: 1rem;
-    background: rgba(31, 41, 55, 0.6);
-    box-shadow:
-      0 0 15px #6366f1aa,
-      inset 0 0 10px #818cf8aa;
-   }
-   section:hover {
-    transform: translateZ(15px);
-    box-shadow:
-      0 0 30px #a5b4fccc,
-      inset 0 0 20px #a5b4fccc;
-   }
-   /* Button style for navigation */
-   .btn-primary {
-    background: #6366f1;
-    color: white;
-    padding: 0.6rem 1.5rem;
-    border-radius: 0.75rem;
-    font-weight: 700;
-    box-shadow: 0 0 15px #818cf8;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    user-select: none;
-    cursor: pointer;
-    text-shadow: 0 0 5px #a5b4fc;
-   }
-   .btn-primary:hover {
-    background: #818cf8;
-    box-shadow: 0 0 30px #a5b4fc;
-   }
-   /* Responsive typography */
-   @media (min-width: 640px) {
-    h1 {
-     font-size: 3.5rem;
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
     }
-    h2 {
-     font-size: 2.5rem;
+    ::-webkit-scrollbar-thumb {
+      background-color: #6366f1;
+      border-radius: 10px;
+      border: 2px solid #1e293b;
     }
-    h3 {
-     font-size: 2rem;
-    }
+    /* Code block styling */
     pre {
-     font-size: 1.05rem;
+      background: #1e293b;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: "Fira Code", monospace, monospace;
+      font-size: 0.9rem;
+      color: #a5b4fc;
+      box-shadow: 0 0 8px #6366f1aa, inset 0 0 6px #6366f1cc;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
     }
-   }
-   @media (min-width: 1024px) {
-    body {
-     padding-left: 2rem;
-     padding-right: 2rem;
+    pre:hover {
+      transform: rotateX(5deg) rotateY(5deg) translateZ(10px);
+      box-shadow: 0 0 20px #818cf8, inset 0 0 12px #818cf8cc;
     }
-    main {
-     max-width: 900px;
+    code {
+      font-family: "Fira Code", monospace, monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
-   }
-   /* Animations for header logo */
-   .logo-spin {
-    animation: spin 20s linear infinite;
-    will-change: transform;
-   }
-   @keyframes spin {
-    from {
-     transform: rotateY(0deg);
+    /* Link styling */
+    a {
+      color: #818cf8;
+      text-decoration: underline;
+      transition: color 0.3s ease;
     }
-    to {
-     transform: rotateY(360deg);
+    a:hover {
+      color: #a5b4fc;
     }
-   }
-   /* Floating animation for header text */
-   .float-text {
-    animation: floatUpDown 6s ease-in-out infinite;
-   }
-   @keyframes floatUpDown {
-    0%, 100% {
-     transform: translateY(0);
-     text-shadow: 0 0 10px #6366f1;
+    /* Heading 3D effect */
+    h1,
+    h2,
+    h3,
+    h4 {
+      text-shadow: 1px 1px 2px #312e81, 2px 2px 6px #4338ca;
     }
-    50% {
-     transform: translateY(-8px);
-     text-shadow: 0 0 20px #a5b4fc;
+    /* Blockquote styling */
+    blockquote {
+      border-left: 4px solid #6366f1;
+      padding-left: 1rem;
+      font-style: italic;
+      color: #c7d2fe;
+      background: #1e293b;
+      border-radius: 0.5rem;
+      box-shadow: inset 0 0 8px #6366f1aa;
+      margin: 1.5rem 0;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
     }
-   }
-   /* Fade-in animation for sections */
-   .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation-fill-mode: forwards;
-    animation-name: fadeInUp;
-    animation-duration: 0.8s;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-   }
-   @keyframes fadeInUp {
-    to {
-     opacity: 1;
-     transform: translateY(0);
+    blockquote:hover {
+      transform: translateZ(10px);
+      box-shadow: inset 0 0 16px #818cf8cc;
     }
-   }
+    /* Table styling */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1.5rem 0;
+      box-shadow: 0 0 10px #4338ca88;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+    table:hover {
+      transform: translateZ(10px);
+      box-shadow: 0 0 20px #818cf8cc;
+    }
+    th,
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #312e81;
+      text-align: left;
+    }
+    th {
+      background: #4338ca;
+      color: #e0e7ff;
+      font-weight: 600;
+    }
+    td {
+      background: #1e293b;
+      color: #c7d2fe;
+    }
+    /* List styling */
+    ol li,
+    ul li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    /* Section spacing */
+    section {
+      margin-bottom: 3rem;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+    section:hover {
+      transform: translateZ(10px);
+    }
+    /* Button style for navigation */
+    .btn-primary {
+      background: #6366f1;
+      color: white;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      box-shadow: 0 0 10px #818cf8;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+    }
+    .btn-primary:hover {
+      background: #818cf8;
+      box-shadow: 0 0 20px #a5b4fc;
+    }
+    /* Responsive typography */
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 2.25rem;
+      }
+      h3 {
+        font-size: 1.75rem;
+      }
+    }
+    /* Navbar 3D and animation */
+    .navbar-3d {
+      transform-style: preserve-3d;
+      perspective: 1500px;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.6);
+      border-radius: 0 0 1rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
+    }
+    .navbar-3d:hover {
+      box-shadow: 0 12px 36px rgba(99, 102, 241, 0.9);
+    }
+    .nav-link-3d {
+      position: relative;
+      color: #e0e7ff;
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      user-select: none;
+    }
+    .nav-link-3d::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+      background: linear-gradient(45deg, #a5b4fc, #818cf8);
+      filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      transform: translateZ(-10px);
+    }
+    .nav-link-3d:hover {
+      transform: translateY(-6px) translateZ(20px) rotateX(10deg);
+      box-shadow: 0 8px 20px #818cf8aa;
+    }
+    .nav-link-3d:hover::before {
+      opacity: 1;
+    }
+    .nav-link-3d.active {
+      color: #c7d2fe;
+      text-shadow: 0 0 8px #a5b4fc;
+      transform: translateY(-8px) translateZ(25px) rotateX(12deg);
+      box-shadow: 0 10px 28px #a5b4fccc;
+    }
+    /* Hamburger 3D */
+    .hamburger-3d {
+      width: 2rem;
+      height: 2rem;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease;
+      user-select: none;
+    }
+    .hamburger-3d span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #e0e7ff;
+      border-radius: 2px;
+      left: 0;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 6px #818cf8aa;
+      transform-origin: center;
+    }
+    .hamburger-3d span:nth-child(1) {
+      top: 0.3rem;
+      transform-style: preserve-3d;
+      transform: translateZ(5px);
+    }
+    .hamburger-3d span:nth-child(2) {
+      top: 0.9rem;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+    }
+    .hamburger-3d span:nth-child(3) {
+      top: 1.5rem;
+      transform-style: preserve-3d;
+      transform: translateZ(5px);
+    }
+    .hamburger-3d.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px) translateZ(10px);
+      box-shadow: 0 0 10px #a5b4fccc;
+    }
+    .hamburger-3d.open span:nth-child(2) {
+      opacity: 0;
+      transform: translateZ(-10px);
+    }
+    .hamburger-3d.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px) translateZ(10px);
+      box-shadow: 0 0 10px #a5b4fccc;
+    }
+    /* Mobile menu 3D */
+    .mobile-menu-3d {
+      background: #1e293b;
+      border-radius: 0 0 1rem 1rem;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.6);
+      transform-style: preserve-3d;
+      perspective: 1500px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+    }
+    .mobile-menu-3d.open {
+      max-height: 500px;
+      padding: 1rem 0;
+    }
+    .mobile-menu-3d a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: #c7d2fe;
+      font-weight: 600;
+      border-radius: 0.75rem;
+      margin: 0 1rem 0.5rem 1rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      user-select: none;
+    }
+    .mobile-menu-3d a:hover,
+    .mobile-menu-3d a.active {
+      background: #4338ca;
+      box-shadow: 0 0 15px #818cf8cc;
+      color: #e0e7ff;
+      transform: translateZ(15px);
+    }
   </style>
  </head>
- <body class="min-h-screen flex flex-col items-center px-4 py-8 max-w-5xl mx-auto select-text">
-  <header class="w-full mb-12 text-center relative">
-   <img
-    alt="Logo Python hijau dengan latar belakang gelap, ikon ular melingkar modern, berputar perlahan"
-    class="mx-auto mb-4 w-28 h-28 rounded-full shadow-2xl logo-spin"
-    height="112"
-    loading="lazy"
-    src="https://storage.googleapis.com/a1aa/image/db37e328-9d97-4444-2c64-02e6a6ba1b47.jpg"
-    width="112"
-   />
-   <h1 class="text-4xl sm:text-5xl font-extrabold mb-2 tracking-tight text-indigo-400 drop-shadow-lg float-text">
-    🐍 E-Book Python untuk Pemula
-   </h1>
-   <p class="text-indigo-300 text-lg sm:text-xl font-semibold italic tracking-wide float-text" style="animation-delay: 0.3s;">
-    Dari Nol Sampai Bisa: Panduan Lengkap Belajar Python By Drgxel
-   </p>
+ <body class="min-h-screen flex flex-col items-center px-4 py-8 max-w-5xl mx-auto select-text bg-gradient-to-b from-indigo-900 via-indigo-950 to-indigo-900">
+  <header class="w-full mb-12">
+   <nav aria-label="Primary Navigation" class="navbar-3d flex items-center justify-between px-6 py-4 shadow-lg">
+    <a aria-label="Homepage" class="flex items-center gap-3 text-indigo-200 hover:text-indigo-100 select-none" href="#">
+     <img alt="Ikon logo ular python hijau neon dengan latar belakang gelap dan efek 3D" class="rounded-full shadow-lg transform-gpu hover:rotate-12 hover:scale-110 transition-transform duration-500" height="48" loading="lazy" src="https://storage.googleapis.com/a1aa/image/76f0587b-c013-424f-7338-ef9a75e31e1d.jpg" width="48"/>
+     <span class="text-2xl font-extrabold tracking-wide select-none drop-shadow-lg">
+      E-Book Python
+     </span>
+    </a>
+    <div class="hidden md:flex gap-6">
+     <a class="nav-link-3d active" data-link="bab-1" href="#bab-1" tabindex="0">
+      Bab 1
+     </a>
+     <a class="nav-link-3d" data-link="apa-itu-python" href="#apa-itu-python">
+      Apa itu Python?
+     </a>
+     <a class="nav-link-3d" data-link="mengapa-python-adalah-pilihan-tepat" href="#mengapa-python-adalah-pilihan-tepat">
+      Mengapa Python?
+     </a>
+     <a class="nav-link-3d" data-link="strategi-belajar-python-yang-mudah" href="#strategi-belajar-python-yang-mudah">
+      Strategi Belajar
+     </a>
+     <a class="nav-link-3d" data-link="instalasi-python---step-by-step" href="#instalasi-python---step-by-step">
+      Instalasi
+     </a>
+     <a class="nav-link-3d" data-link="cara-menjalankan-python" href="#cara-menjalankan-python">
+      Cara Menjalankan
+     </a>
+     <a class="nav-link-3d" data-link="program-python-pertama-anda" href="#program-python-pertama-anda">
+      Program Pertama
+     </a>
+     <a class="nav-link-3d" data-link="selamat-apa-selanjutnya" href="#selamat-apa-selanjutnya">
+      Selamat!
+     </a>
+    </div>
+    <button aria-expanded="false" aria-label="Toggle menu" class="md:hidden hamburger-3d" id="hamburgerBtn" type="button">
+     <span>
+     </span>
+     <span>
+     </span>
+     <span>
+     </span>
+    </button>
+   </nav>
+   <div aria-hidden="true" class="mobile-menu-3d md:hidden" id="mobileMenu">
+    <a data-link="bab-1" href="#bab-1" tabindex="-1">
+     Bab 1
+    </a>
+    <a data-link="apa-itu-python" href="#apa-itu-python" tabindex="-1">
+     Apa itu Python?
+    </a>
+    <a data-link="mengapa-python-adalah-pilihan-tepat" href="#mengapa-python-adalah-pilihan-tepat" tabindex="-1">
+     Mengapa Python?
+    </a>
+    <a data-link="strategi-belajar-python-yang-mudah" href="#strategi-belajar-python-yang-mudah" tabindex="-1">
+     Strategi Belajar
+    </a>
+    <a data-link="instalasi-python---step-by-step" href="#instalasi-python---step-by-step" tabindex="-1">
+     Instalasi
+    </a>
+    <a data-link="cara-menjalankan-python" href="#cara-menjalankan-python" tabindex="-1">
+     Cara Menjalankan
+    </a>
+    <a data-link="program-python-pertama-anda" href="#program-python-pertama-anda" tabindex="-1">
+     Program Pertama
+    </a>
+    <a data-link="selamat-apa-selanjutnya" href="#selamat-apa-selanjutnya" tabindex="-1">
+     Selamat!
+    </a>
+   </div>
   </header>
-  <main
-   class="w-full prose prose-indigo max-w-none prose-headings:text-indigo-400 prose-a:text-indigo-300 prose-pre:bg-indigo-900 prose-pre:text-indigo-100 prose-blockquote:border-indigo-400 prose-blockquote:text-indigo-300"
-  >
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.1s" id="bab-2">
+  <main class="w-full prose prose-indigo max-w-none prose-headings:text-indigo-400 prose-a:text-indigo-300 prose-pre:bg-indigo-900 prose-pre:text-indigo-100 prose-blockquote:border-indigo-400 prose-blockquote:text-indigo-300">
+   <section class="scroll-mt-24" id="bab-1">
     <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-box-open text-indigo-400"></i>
-     Bab 2: Variabel &amp; Tipe Data - Fondasi Kokoh Programming
+     <i class="fas fa-rocket text-indigo-400">
+     </i>
+     Bab 1: Memulai Perjalanan Python Anda
     </h2>
     <blockquote>
      <p>
-      <strong
-       >"Variabel adalah kotak penyimpanan data, tipe data adalah label yang menjelaskan isi kotak tersebut. Master keduanya, dan Anda menguasai 50% programming!"</strong
-      >
+      <strong>
+       "Setiap ahli programming pernah menjadi pemula. Yang membedakan adalah mereka yang tidak pernah berhenti belajar."
+      </strong>
      </p>
     </blockquote>
     <h3 class="text-2xl font-semibold mt-8 mb-3 flex items-center gap-2">
-     <i class="fas fa-book-open text-indigo-400"></i>
-     📖 Daftar Isi Bab 2
+     <i class="fas fa-book-open text-indigo-400">
+     </i>
+     Daftar Isi Bab 1
     </h3>
     <ol class="list-decimal list-inside space-y-1 text-indigo-200">
-     <li><a href="#apa-itu-variabel-analogi-sederhana">🎁 Apa itu Variabel? Analogi Sederhana</a></li>
-     <li><a href="#mengenal-tipe-data-python">🏷️ Mengenal Tipe Data Python</a></li>
-     <li><a href="#string-bermain-dengan-teks">🔤 String: Bermain dengan Teks</a></li>
-     <li><a href="#numbers-integer-vs-float">🔢 Numbers: Integer vs Float</a></li>
-     <li><a href="#boolean-true-atau-false">✅ Boolean: True atau False</a></li>
-     <li><a href="#konversi-tipe-data-type-casting">🔄 Konversi Tipe Data (Type Casting)</a></li>
-     <li><a href="#operator-untuk-setiap-tipe-data">🛠️ Operator untuk Setiap Tipe Data</a></li>
-     <li><a href="#project-password-generator-sederhana">🎮 Project: Password Generator Sederhana</a></li>
-     <li><a href="#project-bmi-calculator">📊 Project: BMI Calculator</a></li>
-     <li><a href="#project-text-analyzer-mini">🎯 Project: Text Analyzer Mini</a></li>
-     <li><a href="#challenge-latihan">🏆 Challenge &amp; Latihan</a></li>
+     <li>
+      <a href="#apa-itu-python">
+       🤔 Apa itu Python?
+      </a>
+     </li>
+     <li>
+      <a href="#mengapa-python-adalah-pilihan-tepat">
+       💎 Mengapa Python adalah Pilihan Tepat?
+      </a>
+     </li>
+     <li>
+      <a href="#strategi-belajar-python-yang-mudah">
+       🎯 Strategi Belajar Python yang Mudah
+      </a>
+     </li>
+     <li>
+      <a href="#instalasi-python---step-by-step">
+       ⚙️ Instalasi Python - Step by Step
+      </a>
+     </li>
+     <li>
+      <a href="#cara-menjalankan-python">
+       🏃‍♂️ Cara Menjalankan Python
+      </a>
+     </li>
+     <li>
+      <a href="#program-python-pertama-anda">
+       🎮 Program Python Pertama Anda
+      </a>
+     </li>
+     <li>
+      <a href="#selamat-apa-selanjutnya">
+       🎉 Selamat! Apa Selanjutnya?
+      </a>
+     </li>
     </ol>
    </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.15s" id="apa-itu-variabel-analogi-sederhana">
+   <section class="scroll-mt-24" id="apa-itu-python">
     <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-gift text-indigo-400"></i>
-     🎁 Apa itu Variabel? Analogi Sederhana
+     <i class="fas fa-question-circle text-indigo-400">
+     </i>
+     Apa itu Python?
     </h2>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-home text-indigo-400"></i>
-     🏠 Analogi Rumah dan Alamat
-    </h3>
     <p>
-     Bayangkan variabel seperti <strong>rumah</strong> di kompleks perumahan:
+     Bayangkan jika Anda bisa berbicara dengan komputer menggunakan bahasa yang hampir mirip bahasa Inggris sehari-hari. Itulah Python!
     </p>
-    <pre><code class="language-python"># Ini seperti membangun rumah dengan alamat "nama"
-nama = "Budi Santoso"
-
-# Alamat: nama
-# Isi rumah: "Budi Santoso"
-# Tipe rumah: String (teks)</code></pre>
-    <p><strong>🏠 Komponen Variabel:</strong></p>
+    <p>
+     Python adalah bahasa pemrograman yang diciptakan oleh
+     <strong>
+      Guido van Rossum
+     </strong>
+     pada tahun 1991. Dia ingin membuat bahasa yang:
+    </p>
     <ul class="list-disc list-inside space-y-1 text-indigo-200">
-     <li><strong>Nama variabel</strong> = Alamat rumah (<code>nama</code>)</li>
-     <li><strong>Nilai variabel</strong> = Isi rumah (<code>"Budi Santoso"</code>)</li>
-     <li><strong>Tipe data</strong> = Jenis rumah (rumah teks, rumah angka, dll)</li>
+     <li>
+      <strong>
+       Mudah dibaca
+      </strong>
+      seperti membaca koran
+     </li>
+     <li>
+      <strong>
+       Mudah ditulis
+      </strong>
+      seperti menulis pesan WhatsApp
+     </li>
+     <li>
+      <strong>
+       Powerful
+      </strong>
+      seperti superkomputer
+     </li>
     </ul>
     <h3 class="text-2xl font-semibold mt-8 mb-3 flex items-center gap-2">
-     <i class="fas fa-bullseye text-indigo-400"></i>
-     🎯 Aturan Penamaan Variabel
+     <i class="fas fa-sparkles text-indigo-400">
+     </i>
+     Kenapa Python Spesial?
     </h3>
-    <p><strong>✅ BOLEH:</strong></p>
-    <pre><code class="language-python">nama = "John"           # huruf kecil
-NAMA = "JOHN"           # huruf besar
-nama_lengkap = "John Doe"  # underscore
-namaLengkap = "John Doe"   # camelCase
-nama2 = "John Jr"       # angka di belakang
-_private = "rahasia"    # underscore di depan</code></pre>
-    <p><strong>❌ TIDAK BOLEH:</strong></p>
-    <pre><code class="language-python">2nama = "John"       # ❌ tidak boleh mulai dengan angka
-nama-lengkap = "John"  # ❌ tidak boleh pakai dash
-nama lengkap = "John"  # ❌ tidak boleh ada spasi
-for = "John"         # ❌ tidak boleh pakai reserved words</code></pre>
-    <h3 class="text-2xl font-semibold mt-8 mb-3 flex items-center gap-2">
-     <i class="fas fa-lightbulb text-indigo-400"></i>
-     💡 Best Practices Penamaan
-    </h3>
-    <pre><code class="language-python"># ❌ Tidak jelas
-x = 25
-a = "John"
-b = 175.5
-
-# ✅ Jelas dan descriptive
-umur = 25
-nama_siswa = "John"
-tinggi_badan_cm = 175.5
-
-# ✅ Python Style (snake_case)
-nama_lengkap = "John Doe"
-hitung_total_harga = 100
-
-# ✅ Konstanta (SCREAMING_SNAKE_CASE)
-MAX_RETRY = 3
-PI = 3.14159</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.2s" id="mengenal-tipe-data-python">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-tags text-indigo-400"></i>
-     🏷️ Mengenal Tipe Data Python
-    </h2>
     <p>
-     Python punya <strong>5 tipe data fundamental</strong> yang wajib Anda kuasai:
+     <strong>
+      1. Sintaks yang Bersahabat
+     </strong>
     </p>
+    <pre><code class="language-python"># Bahasa lain mungkin seperti ini:
+# public class HelloWorld {
+#     public static void main(String[] args) {
+#         System.out.println("Hello World");
+#     }
+# }
+
+# Python cukup begini:
+print("Hello World")</code></pre>
+    <p>
+     <strong>
+      2. Seperti Bahasa Manusia
+     </strong>
+    </p>
+    <pre><code class="language-python"># Ini kode Python asli, bukan pseudocode!
+if weather == "hujan":
+    bring_umbrella = True
+    print("Jangan lupa bawa payung!")
+else:
+    print("Cuaca cerah, selamat jalan-jalan!")</code></pre>
+    <p>
+     <strong>
+      3. Satu Bahasa, Banyak Kegunaan
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      🌐
+      <strong>
+       Website
+      </strong>
+      : Instagram, YouTube, Spotify
+     </li>
+     <li>
+      📊
+      <strong>
+       Data Science
+      </strong>
+      : Netflix recommendations, Google search
+     </li>
+     <li>
+      🤖
+      <strong>
+       AI
+      </strong>
+      : ChatGPT, self-driving cars
+     </li>
+     <li>
+      🎮
+      <strong>
+       Games
+      </strong>
+      : Civilization IV, EVE Online
+     </li>
+     <li>
+      📱
+      <strong>
+       Mobile Apps
+      </strong>
+      : Dropbox, Reddit
+     </li>
+    </ul>
+   </section>
+   <section class="scroll-mt-24" id="mengapa-python-adalah-pilihan-tepat">
+    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+     <i class="fas fa-gem text-indigo-400">
+     </i>
+     Mengapa Python adalah Pilihan Tepat?
+    </h2>
     <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-chart-bar text-indigo-400"></i>
-     📊 Overview Tipe Data
+     <i class="fas fa-bullseye text-indigo-400">
+     </i>
+     Untuk Pemula: Mudah Banget!
+    </h3>
+    <p>
+     <strong>
+      Analogi Sederhana:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       Bahasa lain
+      </strong>
+      = Belajar naik motor manual (susah, banyak yang harus diingat)
+     </li>
+     <li>
+      <strong>
+       Python
+      </strong>
+      = Belajar naik motor matic (focus ke tujuan, bukan teknis)
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-briefcase text-indigo-400">
+     </i>
+     Peluang Karir Fantastis
     </h3>
     <div class="overflow-x-auto rounded-lg shadow-lg">
      <table class="min-w-full text-sm">
       <thead>
        <tr>
-        <th>Tipe</th>
-        <th>Nama Python</th>
-        <th>Contoh</th>
-        <th>Untuk Apa</th>
+        <th>
+         Profesi
+        </th>
+        <th>
+         Gaji rata-rata/bulan
+        </th>
+        <th>
+         Yang dikerjakan
+        </th>
        </tr>
       </thead>
       <tbody>
        <tr class="odd:bg-indigo-900 even:bg-indigo-800">
-        <td><strong>Teks</strong></td>
-        <td><code>str</code></td>
-        <td>"Hello"</td>
-        <td>Nama, alamat, pesan</td>
+        <td>
+         <strong>
+          Python Developer
+         </strong>
+        </td>
+        <td>
+         8-15 juta
+        </td>
+        <td>
+         Bikin aplikasi web/mobile
+        </td>
        </tr>
        <tr class="odd:bg-indigo-900 even:bg-indigo-800">
-        <td><strong>Angka Bulat</strong></td>
-        <td><code>int</code></td>
-        <td>42</td>
-        <td>Umur, jumlah, counter</td>
+        <td>
+         <strong>
+          Data Scientist
+         </strong>
+        </td>
+        <td>
+         12-25 juta
+        </td>
+        <td>
+         Analisis data untuk bisnis
+        </td>
        </tr>
        <tr class="odd:bg-indigo-900 even:bg-indigo-800">
-        <td><strong>Angka Decimal</strong></td>
-        <td><code>float</code></td>
-        <td>3.14</td>
-        <td>Harga, tinggi, berat</td>
+        <td>
+         <strong>
+          AI Engineer
+         </strong>
+        </td>
+        <td>
+         15-30 juta
+        </td>
+        <td>
+         Bikin sistem AI/Machine Learning
+        </td>
        </tr>
        <tr class="odd:bg-indigo-900 even:bg-indigo-800">
-        <td><strong>Boolean</strong></td>
-        <td><code>bool</code></td>
-        <td>True/False</td>
-        <td>Status, kondisi</td>
-       </tr>
-       <tr class="odd:bg-indigo-900 even:bg-indigo-800">
-        <td><strong>None</strong></td>
-        <td><code>NoneType</code></td>
-        <td>None</td>
-        <td>Nilai kosong</td>
+        <td>
+         <strong>
+          DevOps Engineer
+         </strong>
+        </td>
+        <td>
+         10-20 juta
+        </td>
+        <td>
+         Otomasi sistem server
+        </td>
        </tr>
       </tbody>
      </table>
     </div>
     <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-search text-indigo-400"></i>
-     🔍 Cara Cek Tipe Data
-    </h3>
-    <pre><code class="language-python"># Function type() untuk cek tipe data
-print(type("Hello"))        # &lt;class 'str'&gt;
-print(type(42))            # &lt;class 'int'&gt;
-print(type(3.14))          # &lt;class 'float'&gt;
-print(type(True))          # &lt;class 'bool'&gt;
-print(type(None))          # &lt;class 'NoneType'&gt;
-
-# Cara yang lebih readable
-nama = "Python"
-print(f"Tipe data dari {nama} adalah {type(nama).__name__}")
-# Output: Tipe data dari Python adalah str</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-sync-alt text-indigo-400"></i>
-     🎯 Dynamic Typing: Fleksibilitas Python
-    </h3>
-    <pre><code class="language-python"># Variabel yang berubah-ubah (Dynamic Typing)
-data = "Hello"          # Awalnya string
-print(f"{data} adalah {type(data).__name__}")
-
-data = 42               # Sekarang jadi integer
-print(f"{data} adalah {type(data).__name__}")
-
-data = 3.14             # Sekarang jadi float
-print(f"{data} adalah {type(data).__name__}")</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.25s" id="string-bermain-dengan-teks">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-font text-indigo-400"></i>
-     🔤 String: Bermain dengan Teks
-    </h2>
-    <p>String adalah <strong>sequence karakter</strong> yang sangat powerful di Python.</p>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-paint-brush text-indigo-400"></i>
-     🎨 Cara Membuat String
-    </h3>
-    <pre><code class="language-python"># 3 cara membuat string
-nama1 = "Python"           # Double quotes
-nama2 = 'Python'           # Single quotes  
-nama3 = """Python         # Triple quotes (multiline)
-adalah bahasa
-yang awesome!"""
-
-print(nama1)  # Python
-print(nama2)  # Python
-print(nama3)  # Python\nadalah bahasa\nyang awesome!</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-tools text-indigo-400"></i>
-     🔧 String Operations yang Wajib Dikuasai
-    </h3>
-    <h4 class="text-xl font-semibold mt-4 mb-2">1. Concatenation (Penggabungan)</h4>
-    <pre><code class="language-python"># Cara 1: Operator +
-nama_depan = "John"
-nama_belakang = "Doe"
-nama_lengkap = nama_depan + " " + nama_belakang
-print(nama_lengkap)  # John Doe
-
-# Cara 2: F-strings (paling recommended!)
-umur = 25
-pesan = f"Halo, nama saya {nama_lengkap} dan saya berumur {umur} tahun"
-print(pesan)  # Halo, nama saya John Doe dan saya berumur 25 tahun
-
-# Cara 3: format() method
-template = "Nama: {}, Umur: {}"
-result = template.format(nama_lengkap, umur)
-print(result)  # Nama: John Doe, Umur: 25</code></pre>
-    <h4 class="text-xl font-semibold mt-4 mb-2">2. String Methods yang Super Berguna</h4>
-    <pre><code class="language-python">teks = "  Python Programming adalah AWESOME!  "
-
-# Cleaning methods
-print(teks.strip())           # Hapus spasi di awal/akhir
-print(teks.lower())           # Semua huruf kecil
-print(teks.upper())           # Semua huruf besar
-print(teks.title())           # Title Case
-
-# Checking methods
-print(teks.startswith("Python"))  # True/False
-print(teks.endswith("!"))         # True/False
-print("123".isdigit())            # True (semua angka)
-print("abc".isalpha())            # True (semua huruf)
-
-# Manipulation methods
-print(teks.replace("AWESOME", "AMAZING"))  # Ganti kata
-print(teks.split())                        # Split jadi list
-print("-".join(["Python", "is", "cool"])) # Join dari list</code></pre>
-    <h4 class="text-xl font-semibold mt-4 mb-2">3. String Indexing &amp; Slicing</h4>
-    <pre><code class="language-python">kata = "PYTHON"
-#       012345  (index positif)
-#      -654321  (index negatif)
-
-# Indexing (ambil 1 karakter)
-print(kata[0])   # P (karakter pertama)
-print(kata[-1])  # N (karakter terakhir)
-print(kata[2])   # T (karakter ketiga)
-
-# Slicing (ambil beberapa karakter)
-print(kata[0:3])   # PYT (dari index 0 sampai 2)
-print(kata[2:])    # THON (dari index 2 sampai akhir)
-print(kata[:4])    # PYTH (dari awal sampai index 3)
-print(kata[::2])   # PTO (setiap 2 karakter)
-print(kata[::-1])  # NOHTYP (reverse string)</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.3s" id="numbers-integer-vs-float">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-calculator text-indigo-400"></i>
-     🔢 Numbers: Integer vs Float
-    </h2>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-hashtag text-indigo-400"></i>
-     🎯 Integer (int) - Angka Bulat
-    </h3>
-    <pre><code class="language-python"># Berbagai cara menulis integer
-umur = 25
-jumlah_siswa = 30
-tahun = 2024
-
-# Integer bisa sangat besar di Python (unlimited precision!)
-angka_besar = 123456789012345678901234567890
-print(angka_besar)  # Python bisa handle!
-
-# Berbagai base number system
-binary = 0b1010      # Binary (base 2) = 10 decimal
-octal = 0o12         # Octal (base 8) = 10 decimal  
-hexadecimal = 0xa    # Hexadecimal (base 16) = 10 decimal
-
-print(f"Binary {binary}, Octal {octal}, Hex {hexadecimal}")
-# Output: Binary 10, Octal 10, Hex 10</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-percentage text-indigo-400"></i>
-     🎯 Float - Angka Decimal
-    </h3>
-    <pre><code class="language-python"># Berbagai cara menulis float
-tinggi = 175.5
-berat = 68.5
-pi = 3.14159
-suhu = -5.2
-
-# Scientific notation
-kecepatan_cahaya = 3e8      # 3 x 10^8 = 300,000,000
-massa_elektron = 9.11e-31   # 9.11 x 10^-31
-
-print(f"Kecepatan cahaya: {kecepatan_cahaya}")
-print(f"Massa elektron: {massa_elektron}")
-
-# Float precision issues (hati-hati!)
-print(0.1 + 0.2)  # 0.30000000000000004 (bukan 0.3!)
-print(0.1 + 0.2 == 0.3)  # False!
-
-# Solusi: gunakan round()
-print(round(0.1 + 0.2, 1))  # 0.3</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.35s" id="boolean-true-atau-false">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-check-circle text-indigo-400"></i>
-     ✅ Boolean: True atau False
-    </h2>
-    <p>Boolean adalah tipe data yang hanya punya 2 nilai: <code>True</code> atau <code>False</code>.</p>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-lightbulb text-indigo-400"></i>
-     🎯 Boolean Basics
-    </h3>
-    <pre><code class="language-python"># Boolean literals
-is_student = True
-is_graduated = False
-has_job = True
-
-print(f"Status mahasiswa: {is_student}")
-print(f"Sudah lulus: {is_graduated}")
-print(f"Punya kerja: {has_job}")</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-sync-alt text-indigo-400"></i>
-     🔄 Boolean dari Operasi Lain
-    </h3>
-    <pre><code class="language-python"># Dari comparison
-umur = 17
-is_adult = umur >= 18
-print(f"Sudah dewasa: {is_adult}")  # False
-
-# Dari membership testing
-buah_favorit = "apel"
-is_citrus = buah_favorit in ["jeruk", "lemon", "limau"]
-print(f"Buah citrus: {is_citrus}")  # False
-
-# Dari string methods
-email = "user@gmail.com"
-is_gmail = email.endswith("@gmail.com")
-print(f"Email Gmail: {is_gmail}")  # True</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-bolt text-indigo-400"></i>
-     ⚡ Logical Operations
-    </h3>
-    <pre><code class="language-python"># Operator AND, OR, NOT
-is_weekend = True
-is_holiday = False
-have_money = True
-
-# AND: semua harus True
-can_travel = is_weekend and have_money
-print(f"Bisa traveling: {can_travel}")  # True
-
-# OR: salah satu True sudah cukup
-is_free_day = is_weekend or is_holiday
-print(f"Hari libur: {is_free_day}")  # True
-
-# NOT: kebalikan
-is_workday = not is_weekend
-print(f"Hari kerja: {is_workday}")  # False</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-theater-masks text-indigo-400"></i>
-     🎭 Truthy dan Falsy Values
-    </h3>
-    <pre><code class="language-python"># Falsy values (dianggap False)
-print(bool(0))          # False
-print(bool(0.0))        # False
-print(bool(""))         # False (string kosong)
-print(bool([]))         # False (list kosong)
-print(bool(None))       # False
-
-# Truthy values (dianggap True)
-print(bool(1))          # True
-print(bool(-1))         # True
-print(bool("hello"))    # True
-print(bool([1, 2, 3]))  # True
-
-# Practical usage
-nama = input("Masukkan nama: ")
-if nama:  # Akan False jika string kosong
-    print(f"Halo {nama}!")
-else:
-    print("Nama tidak boleh kosong!")</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.4s" id="konversi-tipe-data-type-casting">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-exchange-alt text-indigo-400"></i>
-     🔄 Konversi Tipe Data (Type Casting)
-    </h2>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-bolt text-indigo-400"></i>
-     🎯 Explicit Type Conversion
-    </h3>
-    <pre><code class="language-python"># String ke Number
-umur_str = "25"
-umur_int = int(umur_str)
-print(f"String '{umur_str}' jadi integer {umur_int}")
-
-tinggi_str = "175.5"
-tinggi_float = float(tinggi_str)
-print(f"String '{tinggi_str}' jadi float {tinggi_float}")
-
-# Number ke String
-angka = 42
-angka_str = str(angka)
-print(f"Integer {angka} jadi string '{angka_str}'")
-
-# Boolean ke Number
-print(int(True))   # 1
-print(int(False))  # 0
-
-# Number ke Boolean
-print(bool(0))     # False
-print(bool(1))     # True
-print(bool(-5))    # True</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-exclamation-triangle text-indigo-400"></i>
-     ⚠️ Error Handling dalam Konversi
-    </h3>
-    <pre><code class="language-python"># Safe conversion function
-def safe_int_convert(value, default=0):
-    try:
-        return int(value)
-    except (ValueError, TypeError):
-        return default
-
-print(safe_int_convert("123"))    # 123
-print(safe_int_convert("hello"))  # 0 (default)
-print(safe_int_convert(None))     # 0 (default)</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.45s" id="operator-untuk-setiap-tipe-data">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-tools text-indigo-400"></i>
-     🛠️ Operator untuk Setiap Tipe Data
-    </h2>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-plus text-indigo-400"></i>
-     ➕ Arithmetic Operators (untuk Numbers)
-    </h3>
-    <pre><code class="language-python">a = 10
-b = 3
-
-print(f"Penjumlahan: {a} + {b} = {a + b}")      # 13
-print(f"Pengurangan: {a} - {b} = {a - b}")      # 7
-print(f"Perkalian: {a} * {b} = {a * b}")        # 30
-print(f"Pembagian: {a} / {b} = {a / b}")        # 3.333...
-print(f"Floor Division: {a} // {b} = {a // b}") # 3
-print(f"Modulus: {a} % {b} = {a % b}")          # 1
-print(f"Pangkat: {a} ** {b} = {a ** b}")        # 1000</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-exchange-alt text-indigo-400"></i>
-     🔀 Comparison Operators
-    </h3>
-    <pre><code class="language-python">x = 5
-y = 10
-
-print(f"{x} == {y}: {x == y}")   # False
-print(f"{x} != {y}: {x != y}")   # True
-print(f"{x} < {y}: {x < y}")     # True
-print(f"{x} > {y}: {x > y}")     # False
-print(f"{x} <= {y}: {x <= y}")   # True
-print(f"{x} >= {y}: {x >= y}")   # False</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-font text-indigo-400"></i>
-     🔤 String Operators
-    </h3>
-    <pre><code class="language-python"># Concatenation
-first_name = "John"
-last_name = "Doe"
-full_name = first_name + " " + last_name
-print(full_name)  # John Doe
-
-# Repetition
-laugh = "Ha" * 5
-print(laugh)  # HaHaHaHaHa
-
-# Membership
-sentence = "Python is awesome"
-print("Python" in sentence)     # True
-print("Java" not in sentence)   # True</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.5s" id="project-password-generator-sederhana">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-lock text-indigo-400"></i>
-     🎮 Project: Password Generator Sederhana
-    </h2>
-    <pre><code class="language-python">import random
-import string
-
-def generate_password():
-    print("🔐 PASSWORD GENERATOR")
-    print("=" * 25)
-    
-    # Input panjang password
-    while True:
-        try:
-            length = int(input("Panjang password (4-20): "))
-            if 4 &lt;= length &lt;= 20:
-                break
-            else:
-                print("⚠️ Panjang password harus 4-20 karakter!")
-        except ValueError:
-            print("❌ Masukkan angka yang valid!")
-    
-    # Pilihan karakter
-    use_letters = input("Gunakan huruf? (y/n): ").lower() == 'y'
-    use_numbers = input("Gunakan angka? (y/n): ").lower() == 'y'
-    use_symbols = input("Gunakan simbol? (y/n): ").lower() == 'y'
-    
-    # Build character set
-    chars = ""
-    if use_letters:
-        chars += string.ascii_letters
-    if use_numbers:
-        chars += string.digits
-    if use_symbols:
-        chars += "!@#$%^&*"
-    
-    if not chars:
-        print("❌ Minimal pilih satu jenis karakter!")
-        return
-    
-    # Generate password
-    password = ''.join(random.choice(chars) for _ in range(length))
-    
-    print(f"\n🎯 Password Anda: {password}")
-    print(f"📏 Panjang: {len(password)} karakter")
-
-# Uncomment untuk menjalankan
-# generate_password()</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.55s" id="project-bmi-calculator">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-weight text-indigo-400"></i>
-     📊 Project: BMI Calculator
-    </h2>
-    <pre><code class="language-python">def calculate_bmi():
-    print("🏥 BMI CALCULATOR")
-    print("=" * 20)
-    
-    # Input dengan validasi
-    while True:
-        try:
-            tinggi_cm = float(input("Tinggi badan (cm): "))
-            if tinggi_cm &gt; 0:
-                break
-            else:
-                print("❌ Tinggi harus lebih dari 0!")
-        except ValueError:
-            print("❌ Masukkan angka yang valid!")
-    
-    while True:
-        try:
-            berat = float(input("Berat badan (kg): "))
-            if berat &gt; 0:
-                break
-            else:
-                print("❌ Berat harus lebih dari 0!")
-        except ValueError:
-            print("❌ Masukkan angka yang valid!")
-    
-    # Hitung BMI
-    tinggi_m = tinggi_cm / 100
-    bmi = berat / (tinggi_m ** 2)
-    
-    # Klasifikasi
-    if bmi &lt; 18.5:
-        kategori = "Kurus"
-        emoji = "⚠️"
-    elif bmi &lt; 25:
-        kategori = "Normal"
-        emoji = "✅"
-    elif bmi &lt; 30:
-        kategori = "Kegemukan"
-        emoji = "🟡"
-    else:
-        kategori = "Obesitas"
-        emoji = "🔴"
-    
-    # Output
-    print(f"\n{emoji} HASIL BMI")
-    print(f"📊 BMI: {bmi:.1f}")
-    print(f"🏷️ Kategori: {kategori}")
-    
-    # Saran
-    if kategori == "Kurus":
-        print("💡 Saran: Perbanyak makan bergizi dan olahraga")
-    elif kategori == "Normal":
-        print("💡 Saran: Pertahankan pola hidup sehat")
-    else:
-        print("💡 Saran: Kurangi kalori dan rajin olahraga")
-
-# Uncomment untuk menjalankan
-# calculate_bmi()</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.6s" id="project-text-analyzer-mini">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-file-alt text-indigo-400"></i>
-     🎯 Project: Text Analyzer Mini
-    </h2>
-    <pre><code class="language-python">def analyze_text():
-    print("📝 TEXT ANALYZER")
-    print("=" * 20)
-    
-    text = input("Masukkan teks: ")
-    
-    if not text.strip():
-        print("❌ Teks tidak boleh kosong!")
-        return
-    
-    # Analisis dasar
-    char_count = len(text)
-    char_no_space = len(text.replace(" ", ""))
-    word_count = len(text.split())
-    sentence_count = text.count('.') + text.count('!') + text.count('?')
-    
-    # Analisis karakter
-    uppercase = sum(1 for c in text if c.isupper())
-    lowercase = sum(1 for c in text if c.islower())
-    digits = sum(1 for c in text if c.isdigit())
-    spaces = text.count(' ')
-    
-    # Output hasil
-    print(f"\n📊 HASIL ANALISIS:")
-    print(f"📏 Total karakter: {char_count}")
-    print(f"🔤 Karakter (tanpa spasi): {char_no_space}")
-    print(f"📝 Jumlah kata: {word_count}")
-    print(f"📄 Jumlah kalimat: {sentence_count}")
-    print(f"🔠 Huruf besar: {uppercase}")
-    print(f"🔡 Huruf kecil: {lowercase}")
-    print(f"🔢 Angka: {digits}")
-    print(f"⭐ Spasi: {spaces}")
-    
-    # Kata terpanjang
-    words = text.split()
-    if words:
-        longest_word = max(words, key=len)
-        print(f"📏 Kata terpanjang: '{longest_word}' ({len(longest_word)} huruf)")
-    
-    # Reading time estimate (rata-rata 200 kata per menit)
-    reading_time = max(1, word_count // 200)
-    print(f"⏱️ Estimasi waktu baca: {reading_time} menit")
-
-# Uncomment untuk menjalankan
-# analyze_text()</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.65s" id="challenge-latihan">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-trophy text-indigo-400"></i>
-     🏆 Challenge &amp; Latihan
-    </h2>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-exchange-alt text-indigo-400"></i>
-     🎯 Latihan 1: Variable Swap
-    </h3>
-    <pre><code class="language-python"># Challenge: Tukar nilai dua variabel tanpa variabel ketiga
-a = 10
-b = 20
-print(f"Sebelum: a={a}, b={b}")
-
-# Tulis kode Anda di sini
-# Petunjuk: gunakan teknik arithmetic atau tuple unpacking
-a, b = b, a
-
-print(f"Sesudah: a={a}, b={b}")</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-graduation-cap text-indigo-400"></i>
-     🎯 Latihan 2: Grade Calculator
-    </h3>
-    <pre><code class="language-python"># Buat program yang mengkonversi nilai angka ke huruf
-# 90-100: A, 80-89: B, 70-79: C, 60-69: D, &lt;60: F
-
-def calculate_grade(score):
-    if 90 &lt;= score &lt;= 100:
-        return "A"
-    elif 80 &lt;= score &lt; 90:
-        return "B"
-    elif 70 &lt;= score &lt; 80:
-        return "C"
-    elif 60 &lt;= score &lt; 70:
-        return "D"
-    else:
-        return "F"
-
-# Test cases
-print(calculate_grade(95))  # A
-print(calculate_grade(82))  # B
-print(calculate_grade(67))  # D</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-check text-indigo-400"></i>
-     🎯 Latihan 3: String Palindrome Checker
-    </h3>
-    <pre><code class="language-python"># Buat function untuk cek apakah string adalah palindrom
-# Contoh: "racecar", "madam", "level"
-
-def is_palindrome(text):
-    # Hilangkan spasi dan ubah ke huruf kecil
-    clean_text = ''.join(c.lower() for c in text if c.isalnum())
-    return clean_text == clean_text[::-1]
-
-# Test cases
-print(is_palindrome("racecar"))  # True
-print(is_palindrome("hello"))    # False
-print(is_palindrome("A man a plan a canal Panama"))  # True (ignore spaces &amp; case)</code></pre>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-gamepad text-indigo-400"></i>
-     🎯 Latihan 4: Number Guessing Game
-    </h3>
-    <pre><code class="language-python">import random
-
-def guessing_game():
-    # Buat game tebak angka 1-100
-    # User punya 7 kesempatan
-    # Berikan hint "terlalu besar" atau "terlalu kecil"
-    
-    number = random.randint(1, 100)
-    attempts = 7
-    
-    print("🎮 GAME TEBAK ANGKA")
-    print("Saya memikirkan angka 1-100")
-    print(f"Anda punya {attempts} kesempatan")
-    
-    while attempts &gt; 0:
-        try:
-            guess = int(input("Tebak angka: "))
-        except ValueError:
-            print("❌ Masukkan angka yang valid!")
-            continue
-        
-        if guess == number:
-            print("🎉 Selamat! Tebakan Anda benar!")
-            return
-        elif guess &gt; number:
-            print("⬇️ Terlalu besar!")
-        else:
-            print("⬆️ Terlalu kecil!")
-        
-        attempts -= 1
-        print(f"Sisa kesempatan: {attempts}")
-    
-    print(f"😞 Kesempatan habis! Angka yang benar adalah {number}")
-
-# Uncomment untuk bermain
-# guessing_game()</code></pre>
-   </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.7s" id="rangkuman-bab-2">
-    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-book-reader text-indigo-400"></i>
-     📚 Rangkuman Bab 2
-    </h2>
-    <h3 class="text-2xl font-semibold mb-3 flex items-center gap-2">
-     <i class="fas fa-check-circle text-indigo-400"></i>
-     ✅ Yang Sudah Dipelajari:
-    </h3>
-    <ul class="list-disc list-inside space-y-1 text-indigo-200">
-     <li><strong>Variabel</strong>: Cara menyimpan dan mengelola data</li>
-     <li><strong>Tipe Data</strong>: String, Integer, Float, Boolean, None</li>
-     <li><strong>String Operations</strong>: Slicing, methods, formatting</li>
-     <li><strong>Type Conversion</strong>: Mengubah tipe data</li>
-     <li><strong>Operators</strong>: Arithmetic, comparison, logical</li>
-     <li><strong>Best Practices</strong>: Naming conventions, error handling</li>
-    </ul>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-bullseye text-indigo-400"></i>
-     🎯 Key Takeaways:
-    </h3>
-    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
-     <li>Variabel adalah fondasi programming - pilih nama yang jelas</li>
-     <li>Python Dynamic Typing - fleksibel tapi hati-hati</li>
-     <li>String sangat powerful - banyak built-in methods</li>
-     <li>Type conversion penting - selalu handle errors</li>
-     <li>Practice makes perfect - kerjakan semua latihan</li>
-    </ol>
-    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
-     <i class="fas fa-rocket text-indigo-400"></i>
-     🚀 Persiapan Bab Selanjutnya:
+     <i class="fas fa-globe text-indigo-400">
+     </i>
+     Komunitas Global yang Supportif
     </h3>
     <p>
-     Bab 3 akan membahas <strong>Control Flow</strong> (if-else, loops) yang akan menggunakan semua konsep dari bab ini. Pastikan Anda benar-benar memahami:
+     Python punya komunitas terbesar di dunia programming:
     </p>
     <ul class="list-disc list-inside space-y-1 text-indigo-200">
-     <li>Cara membuat dan menggunakan variabel</li>
-     <li>Perbedaan tipe data dan kapan menggunakannya</li>
-     <li>Boolean operations untuk decision making</li>
-     <li>String manipulation untuk text processing</li>
+     <li>
+      <strong>
+       Stack Overflow
+      </strong>
+      : 1.8 juta pertanyaan Python
+     </li>
+     <li>
+      <strong>
+       GitHub
+      </strong>
+      : 1.5 juta repository Python
+     </li>
+     <li>
+      <strong>
+       PyPI
+      </strong>
+      : 400,000+ library gratis
+     </li>
+     <li>
+      <strong>
+       Indonesia
+      </strong>
+      : 50,000+ Python developer
+     </li>
     </ul>
    </section>
-
-   <section class="scroll-mt-24 fade-in" style="animation-delay: 0.75s" id="bantuan-resources">
+   <section class="scroll-mt-24" id="strategi-belajar-python-yang-mudah">
     <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-     <i class="fas fa-phone-alt text-indigo-400"></i>
-     📞 Bantuan &amp; Resources
+     <i class="fas fa-bullseye text-indigo-400">
+     </i>
+     Strategi Belajar Python yang Mudah
     </h2>
-    <p><strong>🆘 Jika Stuck:</strong></p>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-brain text-indigo-400">
+     </i>
+     Mindset yang Benar
+    </h3>
+    <p>
+     <strong>
+      ❌ Mindset yang Salah:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      "Saya harus paham semua sekaligus"
+     </li>
+     <li>
+      "Kalau error berarti saya bodoh"
+     </li>
+     <li>
+      "Harus belajar 8 jam sehari"
+     </li>
+    </ul>
+    <p class="mt-4">
+     <strong>
+      ✅ Mindset yang Benar:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      "Saya belajar sedikit demi sedikit"
+     </li>
+     <li>
+      "Error adalah teman belajar"
+     </li>
+     <li>
+      "Konsisten 30 menit &gt; belajar 8 jam sekali"
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-map-marked-alt text-indigo-400">
+     </i>
+     Roadmap 30 Hari Pertama
+    </h3>
+    <h4 class="text-xl font-semibold mt-4 mb-2">
+     Minggu 1: "Hello World" sampai Bisa Input-Output
+    </h4>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       Hari 1-2
+      </strong>
+      : Instalasi dan program pertama
+     </li>
+     <li>
+      <strong>
+       Hari 3-4
+      </strong>
+      : Variabel dan tipe data
+     </li>
+     <li>
+      <strong>
+       Hari 5-7
+      </strong>
+      : Input dari user dan output ke layar
+     </li>
+    </ul>
+    <h4 class="text-xl font-semibold mt-4 mb-2">
+     Minggu 2: "Komputer Bisa Mikir"
+    </h4>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       Hari 8-10
+      </strong>
+      : If-else (pengambilan keputusan)
+     </li>
+     <li>
+      <strong>
+       Hari 11-14
+      </strong>
+      : Loop (pengulangan)
+     </li>
+    </ul>
+    <h4 class="text-xl font-semibold mt-4 mb-2">
+     Minggu 3: "Mengatur Data"
+    </h4>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       Hari 15-17
+      </strong>
+      : List (daftar data)
+     </li>
+     <li>
+      <strong>
+       Hari 18-21
+      </strong>
+      : Dictionary (data berpasangan)
+     </li>
+    </ul>
+    <h4 class="text-xl font-semibold mt-4 mb-2">
+     Minggu 4: "Bikin Fungsi Sendiri"
+    </h4>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       Hari 22-25
+      </strong>
+      : Function dasar
+     </li>
+     <li>
+      <strong>
+       Hari 26-28
+      </strong>
+      : Function dengan parameter
+     </li>
+     <li>
+      <strong>
+       Hari 29-30
+      </strong>
+      : Project mini pertama
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-book text-indigo-400">
+     </i>
+     Cara Belajar yang Efektif
+    </h3>
+    <p>
+     <strong>
+      Formula 3-2-1:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       3 menit
+      </strong>
+      : Baca teori
+     </li>
+     <li>
+      <strong>
+       20 menit
+      </strong>
+      : Praktek coding
+     </li>
+     <li>
+      <strong>
+       1 menit
+      </strong>
+      : Refleksi apa yang dipelajari
+     </li>
+    </ul>
+    <p class="mt-4">
+     <strong>
+      Aturan 80/20:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       20% teori
+      </strong>
+      (baca, nonton video)
+     </li>
+     <li>
+      <strong>
+       80% praktek
+      </strong>
+      (coding langsung)
+     </li>
+    </ul>
+   </section>
+   <section class="scroll-mt-24" id="instalasi-python---step-by-step">
+    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+     <i class="fas fa-cogs text-indigo-400">
+     </i>
+     Instalasi Python - Step by Step
+    </h2>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fab fa-windows text-indigo-400">
+     </i>
+     Untuk Windows (Paling Mudah)
+    </h3>
+    <p>
+     <strong>
+      Step 1: Download
+     </strong>
+    </p>
     <ol class="list-decimal list-inside space-y-1 text-indigo-200">
-     <li>Baca error message dengan teliti</li>
-     <li>Print variabel untuk debugging</li>
-     <li>Gunakan <code>type()</code> untuk cek tipe data</li>
-     <li>Test dengan data sederhana dulu</li>
+     <li>
+      Buka browser, ketik:
+      <code>
+       python.org
+      </code>
+     </li>
+     <li>
+      Klik tombol kuning besar "Download Python"
+     </li>
+     <li>
+      File akan download otomatis
+     </li>
     </ol>
-    <p><strong>📖 Referensi Tambahan:</strong></p>
+    <p class="mt-4">
+     <strong>
+      Step 2: Install
+     </strong>
+    </p>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
+     <li>
+      Klik dua kali file yang di-download
+     </li>
+     <li>
+      <strong>
+       PENTING
+      </strong>
+      : ✅ Centang "Add Python to PATH"
+     </li>
+     <li>
+      Klik "Install Now"
+     </li>
+     <li>
+      Tunggu sampai selesai (3-5 menit)
+     </li>
+    </ol>
+    <p class="mt-4">
+     <strong>
+      Step 3: Test Instalasi
+     </strong>
+    </p>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
+     <li>
+      Tekan
+      <kbd>
+       Windows + R
+      </kbd>
+     </li>
+     <li>
+      Ketik
+      <code>
+       cmd
+      </code>
+      , tekan Enter
+     </li>
+     <li>
+      Ketik:
+      <code>
+       python --version
+      </code>
+     </li>
+     <li>
+      Kalau muncul "Python 3.x.x" berarti berhasil! 🎉
+     </li>
+    </ol>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fab fa-apple text-indigo-400">
+     </i>
+     Untuk Mac
+    </h3>
+    <p>
+     <strong>
+      Cara Termudah - Pakai Homebrew:
+     </strong>
+    </p>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
+     <li>
+      Buka Terminal (Cmd + Space, ketik "Terminal")
+     </li>
+     <li>
+      Copy-paste ini:
+     </li>
+    </ol>
+    <pre><code class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200" start="3">
+     <li>
+      Setelah selesai, ketik:
+     </li>
+    </ol>
+    <pre><code class="language-bash">brew install python</code></pre>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fab fa-linux text-indigo-400">
+     </i>
+     Untuk Linux (Ubuntu/Debian)
+    </h3>
+    <p>
+     Buka terminal dan ketik:
+    </p>
+    <pre><code class="language-bash">sudo apt update
+sudo apt install python3 python3-pip</code></pre>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-file-alt text-indigo-400">
+     </i>
+     Text Editor yang Direkomendasikan
+    </h3>
+    <p>
+     <strong>
+      Untuk Pemula Total:
+     </strong>
+    </p>
     <ul class="list-disc list-inside space-y-1 text-indigo-200">
-     <li><a href="https://docs.python.org" target="_blank" rel="noopener noreferrer">Python Official Documentation: docs.python.org</a></li>
-     <li><a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target="_blank" rel="noopener noreferrer">Python String Methods</a></li>
-     <li><a href="https://pep8.org" target="_blank" rel="noopener noreferrer">PEP 8 Style Guide</a></li>
+     <li>
+      <strong>
+       IDLE
+      </strong>
+      (sudah include saat install Python)
+     </li>
+     <li>
+      <strong>
+       Thonny
+      </strong>
+      (khusus untuk belajar Python)
+     </li>
     </ul>
-    <p><strong>💪 Tips Belajar:</strong></p>
+    <p class="mt-4">
+     <strong>
+      Untuk yang Ingin Serius:
+     </strong>
+    </p>
     <ul class="list-disc list-inside space-y-1 text-indigo-200">
-     <li>Practice coding setiap hari</li>
-     <li>Jangan hanya baca, tapi praktek langsung</li>
-     <li>Buat project kecil-kecil</li>
-     <li>Join komunitas Python Indonesia</li>
+     <li>
+      <strong>
+       Visual Studio Code
+      </strong>
+      (gratis, paling populer)
+     </li>
+     <li>
+      <strong>
+       PyCharm Community
+      </strong>
+      (IDE khusus Python)
+     </li>
     </ul>
+   </section>
+   <section class="scroll-mt-24" id="cara-menjalankan-python">
+    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+     <i class="fas fa-running text-indigo-400">
+     </i>
+     Cara Menjalankan Python
+    </h2>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-gamepad text-indigo-400">
+     </i>
+     Mode 1: Python Shell (Playground)
+    </h3>
+    <p>
+     Python Shell itu seperti
+     <strong>
+      WhatsApp chat dengan komputer
+     </strong>
+     . Anda ketik sesuatu, komputer langsung balas!
+    </p>
+    <p>
+     <strong>
+      Cara buka:
+     </strong>
+    </p>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
+     <li>
+      Buka Command Prompt/Terminal
+     </li>
+     <li>
+      Ketik
+      <code>
+       python
+      </code>
+      tekan Enter
+     </li>
+     <li>
+      Akan muncul
+      <code>
+       &gt;&gt;
+      </code>
+     </li>
+    </ol>
+    <p>
+     <strong>
+      Contoh main di Shell:
+     </strong>
+    </p>
+    <pre><code class="language-python">&gt;&gt;&gt; print("Halo Python!")
+Halo Python!
+
+&gt;&gt;&gt; 2 + 2
+4
+
+&gt;&gt;&gt; nama = "Budi"
+&gt;&gt;&gt; print(f"Halo {nama}!")
+Halo Budi!
+
+&gt;&gt;&gt; # Ini adalah kalkulator super canggih
+&gt;&gt;&gt; (100 + 50) * 2
+300</code></pre>
+    <p>
+     <strong>
+      Kapan pakai Shell:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      ✅ Coba-coba kode cepat
+     </li>
+     <li>
+      ✅ Hitung-hitungan sederhana
+     </li>
+     <li>
+      ✅ Test function baru
+     </li>
+     <li>
+      ✅ Eksperimen
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-file-code text-indigo-400">
+     </i>
+     Mode 2: File Python (Program Serius)
+    </h3>
+    <p>
+     File Python seperti
+     <strong>
+      dokumen Word untuk kode
+     </strong>
+     . Bisa disimpan, dibuka lagi, diedit.
+    </p>
+    <p>
+     <strong>
+      Cara bikin file Python:
+     </strong>
+    </p>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
+     <li>
+      Buka text editor
+     </li>
+     <li>
+      Tulis kode Python
+     </li>
+     <li>
+      Save dengan nama
+      <code>
+       namafile.py
+      </code>
+     </li>
+     <li>
+      Jalankan dengan
+      <code>
+       python namafile.py
+      </code>
+     </li>
+    </ol>
+    <p>
+     <strong>
+      Contoh file
+      <code>
+       hello.py
+      </code>
+      :
+     </strong>
+    </p>
+    <pre><code class="language-python"># File: hello.py
+print("🎉 Selamat datang di dunia Python!")
+print("=" * 40)
+
+nama = input("Siapa nama Anda? ")
+print(f"Senang berkenalan, {nama}! 👋")
+print("Selamat belajar Python!")</code></pre>
+    <p>
+     <strong>
+      Kapan pakai File:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      ✅ Program yang panjang
+     </li>
+     <li>
+      ✅ Kode yang ingin disimpan
+     </li>
+     <li>
+      ✅ Project serius
+     </li>
+     <li>
+      ✅ Berbagi ke orang lain
+     </li>
+    </ul>
+   </section>
+   <section class="scroll-mt-24" id="program-python-pertama-anda">
+    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+     <i class="fas fa-gamepad text-indigo-400">
+     </i>
+     Program Python Pertama Anda
+    </h2>
+    <p>
+     Mari kita buat program yang benar-benar berguna dan menyenangkan!
+    </p>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-bullseye text-indigo-400">
+     </i>
+     Project: Kalkulator Cerdas
+    </h3>
+    <pre><code class="language-python"># File: kalkulator_cerdas.py
+
+print("🧮 KALKULATOR CERDAS")
+print("=" * 25)
+print("Halo! Saya kalkulator yang bisa ngomong! 😄")
+
+# Input dari user
+print("\nMari kita hitung sesuatu...")
+angka1 = float(input("Masukkan angka pertama: "))
+operasi = input("Pilih operasi (+, -, *, /): ")
+angka2 = float(input("Masukkan angka kedua: "))
+
+# Proses perhitungan
+if operasi == "+":
+    hasil = angka1 + angka2
+    kata_operasi = "ditambah"
+elif operasi == "-":
+    hasil = angka1 - angka2
+    kata_operasi = "dikurang"
+elif operasi == "*":
+    hasil = angka1 * angka2
+    kata_operasi = "dikali"
+elif operasi == "/":
+    if angka2 != 0:
+        hasil = angka1 / angka2
+        kata_operasi = "dibagi"
+    else:
+        print("❌ Waduh! Tidak bisa dibagi dengan nol!")
+        exit()
+else:
+    print("❌ Operasi tidak dikenal!")
+    exit()
+
+# Output hasil
+print(f"\n✨ Hasil: {angka1} {kata_operasi} {angka2} = {hasil}")
+
+# Komentar cerdas berdasarkan hasil
+if hasil &gt; 100:
+    print("🚀 Wah, hasilnya besar banget!")
+elif hasil &lt; 0:
+    print("📉 Hasilnya negatif nih!")
+elif hasil == 0:
+    print("🔄 Hasilnya nol, netral banget!")
+else:
+    print("👍 Hasilnya pas!")
+
+print("\nTerima kasih sudah menggunakan Kalkulator Cerdas! 🙏")</code></pre>
+    <h3 class="text-2xl font-semibold mt-10 mb-3 flex items-center gap-2">
+     <i class="fas fa-search text-indigo-400">
+     </i>
+     Bedah Kode: Setiap Baris Punya Makna!
+    </h3>
+    <h4 class="text-xl font-semibold mt-6 mb-2 flex items-center gap-2">
+     <i class="fas fa-film text-indigo-400">
+     </i>
+     Bagian 1: Header Program (Baris 1-6)
+    </h4>
+    <pre><code class="language-python"># File: kalkulator_cerdas.py
+print("🧮 KALKULATOR CERDAS")
+print("=" * 25)
+print("Halo! Saya kalkulator yang bisa ngomong! 😄")</code></pre>
+    <p>
+     <strong>
+      📝 Apa ini?
+     </strong>
+     Bagian pembuka program
+    </p>
+    <p>
+     <strong>
+      🎯 Untuk apa?
+     </strong>
+     Memberi tahu user program apa yang sedang berjalan
+    </p>
+    <p>
+     <strong>
+      🔧 Bisa jadi apa?
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Splash screen aplikasi mobile
+     </li>
+     <li>
+      Header website
+     </li>
+     <li>
+      Loading screen game
+     </li>
+    </ul>
+    <h4 class="text-xl font-semibold mt-6 mb-2 flex items-center gap-2">
+     <i class="fas fa-microphone text-indigo-400">
+     </i>
+     Bagian 2: Input Section (Baris 8-11)
+    </h4>
+    <pre><code class="language-python">print("\nMari kita hitung sesuatu...")
+angka1 = float(input("Masukkan angka pertama: "))
+operasi = input("Pilih operasi (+, -, *, /): ")
+angka2 = float(input("Masukkan angka kedua: "))</code></pre>
+    <p>
+     <strong>
+      📝 Apa ini?
+     </strong>
+     Mengambil data dari user
+    </p>
+    <p>
+     <strong>
+      🎯 Untuk apa?
+     </strong>
+     Mendapat input yang dibutuhkan untuk kalkulasi
+    </p>
+    <p>
+     <strong>
+      🔧 Bisa jadi apa?
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Form registrasi website
+     </li>
+     <li>
+      Survey online
+     </li>
+     <li>
+      Game yang perlu input player
+     </li>
+    </ul>
+    <h4 class="text-xl font-semibold mt-6 mb-2 flex items-center gap-2">
+     <i class="fas fa-brain text-indigo-400">
+     </i>
+     Bagian 3: Decision Logic (Baris 13-29)
+    </h4>
+    <pre><code class="language-python">if operasi == "+":
+    hasil = angka1 + angka2
+    kata_operasi = "ditambah"
+elif operasi == "-":
+    hasil = angka1 - angka2
+    kata_operasi = "dikurang"
+# ... dan seterusnya</code></pre>
+    <p>
+     <strong>
+      📝 Apa ini?
+     </strong>
+     Logika pengambilan keputusan
+    </p>
+    <p>
+     <strong>
+      🎯 Untuk apa?
+     </strong>
+     Menentukan operasi mana yang akan dijalankan
+    </p>
+    <p>
+     <strong>
+      🔧 Bisa jadi apa?
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Sistem login (if password benar, masuk; else, tolak)
+     </li>
+     <li>
+      Game RPG (if level &gt; 10, unlock skill baru)
+     </li>
+     <li>
+      E-commerce (if stok &gt; 0, bisa beli; else, sold out)
+     </li>
+    </ul>
+    <h4 class="text-xl font-semibold mt-6 mb-2 flex items-center gap-2">
+     <i class="fas fa-palette text-indigo-400">
+     </i>
+     Bagian 4: Output &amp; Feedback (Baris 31-40)
+    </h4>
+    <pre><code class="language-python">print(f"\n✨ Hasil: {angka1} {kata_operasi} {angka2} = {hasil}")
+
+if hasil &gt; 100:
+    print("🚀 Wah, hasilnya besar banget!")
+elif hasil &lt; 0:
+    print("📉 Hasilnya negatif nih!")</code></pre>
+    <p>
+     <strong>
+      📝 Apa ini?
+     </strong>
+     Menampilkan hasil dan memberikan feedback
+    </p>
+    <p>
+     <strong>
+      🎯 Untuk apa?
+     </strong>
+     User experience yang lebih engaging
+    </p>
+    <p>
+     <strong>
+      🔧 Bisa jadi apa?
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Notifikasi apps (Instagram: "Foto Anda disukai 100 orang!")
+     </li>
+     <li>
+      Game achievement ("Level UP! Selamat!")
+     </li>
+     <li>
+      Fitness app ("Target 10,000 steps tercapai!")
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-10 mb-3 flex items-center gap-2">
+     <i class="fas fa-bullseye text-indigo-400">
+     </i>
+     Project: Tebak Umur Ajaib
+    </h3>
+    <pre><code class="language-python"># File: tebak_umur.py
+
+print("🔮 TEBAK UMUR AJAIB")
+print("=" * 20)
+print("Saya bisa menebak tahun lahir Anda dengan ajaib! ✨")
+
+# Input
+umur = int(input("\nBerapa umur Anda sekarang? "))
+tahun_sekarang = 2024
+
+# Proses
+tahun_lahir = tahun_sekarang - umur
+
+# Output dengan sentuhan ajaib
+print(f"\n🎭 *mengocok bola kristal*")
+print(f"🔮 *mata terpejam, merasakan energi mistis*")
+print(f"✨ Saya melihat... saya melihat...")
+print(f"🎯 Anda lahir di tahun {tahun_lahir}!")
+
+# Bonus info menarik
+if tahun_lahir &gt;= 2010:
+    generasi = "Gen Alpha (digital native sejati!)"
+elif tahun_lahir &gt;= 1997:
+    generasi = "Gen Z (anak zaman digital!)"
+elif tahun_lahir &gt;= 1981:
+    generasi = "Milenial (generasi sandwich!)"
+elif tahun_lahir &gt;= 1965:
+    generasi = "Gen X (generasi pekerja keras!)"
+else:
+    generasi = "Baby Boomer (generasi emas!)"
+
+print(f"🏷️ Anda termasuk {generasi}")
+
+# Fun fact berdasarkan umur
+if umur &lt; 18:
+    print("🎒 Masih sekolah ya? Semangat belajar!")
+elif umur &lt; 25:
+    print("🎓 Lagi kuliah atau fresh graduate nih!")
+elif umur &lt; 35:
+    print("💼 Lagi fokus karir ya? Sukses terus!")
+else:
+    print("🧘 Sudah wise dan berpengalaman!")
+
+print(f"\n🎉 Selamat! Anda sudah hidup {umur * 365} hari di dunia ini!")</code></pre>
+    <h3 class="text-2xl font-semibold mt-10 mb-3 flex items-center gap-2">
+     <i class="fas fa-trophy text-indigo-400">
+     </i>
+     Apa yang Baru Anda Pelajari?
+    </h3>
+    <p>
+     <strong>
+      Dari Kalkulator Cerdas:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      ✅ Input dengan
+      <code>
+       input()
+      </code>
+      dan konversi
+      <code>
+       float()
+      </code>
+     </li>
+     <li>
+      ✅ Conditional dengan
+      <code>
+       if-elif-else
+      </code>
+     </li>
+     <li>
+      ✅ String formatting dengan f-strings
+     </li>
+     <li>
+      ✅ Error handling sederhana
+     </li>
+     <li>
+      ✅ Exit program dengan
+      <code>
+       exit()
+      </code>
+     </li>
+    </ul>
+    <p class="mt-4">
+     <strong>
+      Dari Tebak Umur Ajaib:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      ✅ Operasi matematika sederhana
+     </li>
+     <li>
+      ✅ Variabel dan assignment
+     </li>
+     <li>
+      ✅ Nested conditionals
+     </li>
+     <li>
+      ✅ Print dengan emoji dan formatting
+     </li>
+    </ul>
+   </section>
+   <section class="scroll-mt-24" id="selamat-apa-selanjutnya">
+    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+     <i class="fas fa-trophy text-indigo-400">
+     </i>
+     Selamat! Apa Selanjutnya?
+    </h2>
+    <p>
+     Anda baru saja menyelesaikan Bab 1 dan sudah bisa:
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      ✅ Install Python
+     </li>
+     <li>
+      ✅ Menjalankan Python Shell dan file
+     </li>
+     <li>
+      ✅ Membuat program yang menggunakan input/output
+     </li>
+     <li>
+      ✅ Menggunakan conditional (if-else)
+     </li>
+     <li>
+      ✅ Operasi matematika dasar
+     </li>
+     <li>
+      ✅ String formatting
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-rocket text-indigo-400">
+     </i>
+     Preview Bab 2: "Variabel &amp; Tipe Data"
+    </h3>
+    <p>
+     Di bab selanjutnya, kita akan explore lebih dalam:
+    </p>
+    <p>
+     <strong>
+      🎯 Yang akan dipelajari:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Apa itu variabel sebenarnya?
+     </li>
+     <li>
+      Tipe data Python: int, float, string, boolean
+     </li>
+     <li>
+      Cara konversi antar tipe data
+     </li>
+     <li>
+      String manipulation yang powerful
+     </li>
+     <li>
+      Memory management sederhana
+     </li>
+    </ul>
+    <p>
+     <strong>
+      🎮 Project yang akan dibuat:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Password Generator
+     </li>
+     <li>
+      BMI Calculator dengan kategori
+     </li>
+     <li>
+      Text Analyzer
+     </li>
+     <li>
+      Mini Database sederhana
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-lightbulb text-indigo-400">
+     </i>
+     Tips Lanjutan Belajar
+    </h3>
+    <p>
+     <strong>
+      Untuk Minggu Ini:
+     </strong>
+    </p>
+    <ol class="list-decimal list-inside space-y-1 text-indigo-200">
+     <li>
+      <strong>
+       Main-main di Python Shell
+      </strong>
+      15 menit setiap hari
+     </li>
+     <li>
+      <strong>
+       Modifikasi program
+      </strong>
+      yang sudah ada dengan ide Anda
+     </li>
+     <li>
+      <strong>
+       Coba break program
+      </strong>
+      - apa yang terjadi kalau input aneh?
+     </li>
+    </ol>
+    <p>
+     <strong>
+      Jangan Lupa:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      Python itu
+      <strong>
+       case-sensitive
+      </strong>
+      :
+      <code>
+       Print
+      </code>
+      ≠
+      <code>
+       print
+      </code>
+     </li>
+     <li>
+      <strong>
+       Indentasi penting
+      </strong>
+      : Python pakai spasi, bukan kurung kurawal
+     </li>
+     <li>
+      <strong>
+       Error itu normal
+      </strong>
+      : Semua programmer dapat error setiap hari!
+     </li>
+    </ul>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-star text-indigo-400">
+     </i>
+     Motivasi Penutup
+    </h3>
     <blockquote>
      <p>
-      <strong
-       >"Programming is like writing a book. You start with a blank page, add variables as characters, and create a story with logic. Master the basics, and you can write any story you want!"</strong
-      >
+      <strong>
+       "Anda baru saja mengambil langkah pertama dalam perjalanan yang akan mengubah cara Anda memandang teknologi. Setiap baris kode yang Anda tulis adalah investasi untuk masa depan yang lebih cerah!"
+      </strong>
      </p>
     </blockquote>
-    <p class="text-center font-semibold text-indigo-300 text-lg mt-6">🎉 Selamat! Anda telah menyelesaikan Bab 2!<br />Next: Bab 3 - Control Flow &amp; Decision Making 🚀</p>
+    <p>
+     <strong>
+      Fun Fact
+     </strong>
+     : Rata-rata programmer professional masih googling dan dapat error setiap hari. Yang membedakan mereka dengan pemula adalah
+     <strong>
+      persistensi
+     </strong>
+     dan
+     <strong>
+      kebiasaan debugging
+     </strong>
+     .
+    </p>
+    <h3 class="text-2xl font-semibold mt-6 mb-3 flex items-center gap-2">
+     <i class="fas fa-link text-indigo-400">
+     </i>
+     Resources Bonus
+    </h3>
+    <p>
+     <strong>
+      Kalau Stuck atau Butuh Bantuan:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <a href="https://www.google.com/search?q=python+%5Bproblem+anda%5D" rel="noopener noreferrer" target="_blank">
+       Google: "python [problem anda]"
+      </a>
+     </li>
+     <li>
+      <a href="https://stackoverflow.com/questions/tagged/python" rel="noopener noreferrer" target="_blank">
+       Stack Overflow: Tanya jawab programming terbesar
+      </a>
+     </li>
+     <li>
+      <a href="https://docs.python.org/3/" rel="noopener noreferrer" target="_blank">
+       Python Documentation: docs.python.org
+      </a>
+     </li>
+     <li>
+      Komunitas Indonesia: Grup Facebook/Telegram "Python Indonesia"
+     </li>
+    </ul>
+    <p>
+     <strong>
+      YouTube Channels Recommended:
+     </strong>
+    </p>
+    <ul class="list-disc list-inside space-y-1 text-indigo-200">
+     <li>
+      <a href="https://www.youtube.com/c/DeaAfriza" rel="noopener noreferrer" target="_blank">
+       Dea Afriza (ez untuk di fahami)
+      </a>
+     </li>
+     <li>
+      <a href="https://www.youtube.com/c/ProgrammerZamanNow" rel="noopener noreferrer" target="_blank">
+       Programmer Zaman Now (Indonesia)
+      </a>
+     </li>
+     <li>
+      <a href="https://www.youtube.com/user/schafer5" rel="noopener noreferrer" target="_blank">
+       Corey Schafer (English, sangat jelas)
+      </a>
+     </li>
+     <li>
+      <a href="https://www.youtube.com/c/realpython" rel="noopener noreferrer" target="_blank">
+       Real Python (English, untuk level menengah)
+      </a>
+     </li>
+    </ul>
+    <p class="mt-8 text-center text-indigo-300 font-semibold text-lg">
+     Happy Coding! 🐍✨
+    </p>
    </section>
   </main>
   <footer class="w-full mt-16 mb-8 text-center text-indigo-400 text-sm select-none">
    © 2024 Drgxel - E-Book Python untuk Pemula
   </footer>
-
   <script>
-   // Animate fade-in for sections on scroll
-   document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section.fade-in');
-    const options = {
-     threshold: 0.1,
-    };
-    const observer = new IntersectionObserver((entries, observer) => {
-     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-       entry.target.style.animationPlayState = 'running';
-       observer.unobserve(entry.target);
+   (() => {
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.querySelectorAll(".nav-link-3d");
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+
+      function closeMobileMenu() {
+        hamburgerBtn.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        hamburgerBtn.setAttribute("aria-expanded", "false");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        mobileLinks.forEach((link) => (link.tabIndex = -1));
       }
-     });
-    }, options);
 
-    sections.forEach(section => {
-     section.style.animationPlayState = 'paused';
-     observer.observe(section);
-    });
-   });
+      function openMobileMenu() {
+        hamburgerBtn.classList.add("open");
+        mobileMenu.classList.add("open");
+        hamburgerBtn.setAttribute("aria-expanded", "true");
+        mobileMenu.setAttribute("aria-hidden", "false");
+        mobileLinks.forEach((link) => (link.tabIndex = 0));
+      }
 
-   // Smooth scroll for anchor links with offset for fixed header effect
-   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-     e.preventDefault();
-     const targetID = this.getAttribute('href').substring(1);
-     const target = document.getElementById(targetID);
-     if (target) {
-      const yOffset = -80; // offset for header height
-      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-     }
-    });
-   });
+      hamburgerBtn.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("open")) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
 
-   // Advanced: Highlight active TOC link on scroll
-   const tocLinks = document.querySelectorAll('ol.list-decimal a');
-   const sections = Array.from(tocLinks).map(link => {
-    const id = link.getAttribute('href').substring(1);
-    return document.getElementById(id);
-   });
+      // Close mobile menu on link click
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          closeMobileMenu();
+        });
+      });
 
-   window.addEventListener('scroll', () => {
-    let currentIndex = sections.length - 1;
-    for (let i = 0; i < sections.length; i++) {
-     if (window.scrollY < sections[i].offsetTop - 100) {
-      currentIndex = i - 1;
-      break;
-     }
-    }
-    tocLinks.forEach(link => link.classList.remove('text-indigo-100', 'font-bold'));
-    if (currentIndex >= 0) {
-     tocLinks[currentIndex].classList.add('text-indigo-100', 'font-bold');
-    }
-   });
+      // Smooth scroll and active link highlight
+      function setActiveLink(id) {
+        navLinks.forEach((link) => {
+          if (link.dataset.link === id) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+        mobileLinks.forEach((link) => {
+          if (link.dataset.link === id) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      function onScroll() {
+        const scrollPos = window.scrollY + window.innerHeight / 4;
+        let currentId = "bab-1";
+        document.querySelectorAll("section[id]").forEach((section) => {
+          if (scrollPos >= section.offsetTop) {
+            currentId = section.id;
+          }
+        });
+        setActiveLink(currentId);
+      }
+
+      window.addEventListener("scroll", onScroll);
+
+      // Initialize active link on load
+      window.addEventListener("load", () => {
+        onScroll();
+        // Set mobile menu links tabindex to -1 initially
+        mobileLinks.forEach((link) => (link.tabIndex = -1));
+      });
+
+      // Keyboard navigation for hamburger button
+      hamburgerBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          hamburgerBtn.click();
+        }
+      });
+    })();
   </script>
  </body>
 </html>
